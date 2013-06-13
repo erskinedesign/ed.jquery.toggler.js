@@ -54,10 +54,12 @@
     };
 
     $.fn.pluginName = function(option) {
-        var opts = $.fn.pluginName.defaults;
+        var opts;
 
         if (typeof option === 'object' && option) {
-            opts = $.extend( {}, opts, option );
+            opts = $.extend(true, {}, $.fn.toggler.defaults, option);
+        } else {
+            opts = $.fn.toggler.defaults;
         }
         return this.each(function() {
             var $this = $(this),
