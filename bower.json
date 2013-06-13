@@ -1,7 +1,7 @@
 {
-  "name": "ed.jquery.plugin.template",
-  "version": "0.1.1",
-  "main": "jquery.plugin.template.js",
+  "name": "ed.jquery.toggler",
+  "version": "0.5.0",
+  "main": "jquery.toggler.js",
   "ignore": [
     "**/.*",
     "node_modules",
