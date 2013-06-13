@@ -1,0 +1,10 @@
+{
+  "name": "ed.jquery.plugin.template.js",
+  "version": "0.1.0",
+  "main": "jquery.plugin.template.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}
