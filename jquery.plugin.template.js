@@ -3,12 +3,12 @@
  * A simple jQuery Plugin template that can optionally be loaded as an AMD module
  * 
  * @author  Tom Davies - Erskine Design
- * @version  0.1.0
+ * @version  0.1.1
  */
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define(['jQuery'], factory);
+        define(['jquery'], factory);
     } else {
         // Browser globals
         factory(jQuery);
