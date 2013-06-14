@@ -21,7 +21,7 @@
 
         this.targetSel = $trigger.attr('href') || $trigger.attr('data-target');
         this.$target = $(this.targetSel);
-        this.group = $trigger.data('toggleGroup') || false;
+        this.group = opts.toggleGroup || $trigger.data('toggleGroup') ;
 
         this.init();
     };
