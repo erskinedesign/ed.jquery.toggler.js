@@ -31,11 +31,31 @@ Invoke directly on a collection:
 
 Or auto initialise on click/change via the magic of `data` attributes and event delegation:
 
-    <button data-target="#my-id" data-toggle>Toggle content</button>
-    <a href="#my-id" data-toggle>Toggle content</a>
-    <div id="#my-id">
+    <button data-target="#id1" data-toggle>Toggle content</button>
+    <a href="#id1" data-toggle>Toggle content</a>
+    <div id="#id1">
         Content to toggle.
     </div>
+
+### <a id="toggle-groups">Toggle groups</a>
+
+If you set a `data-toggle-group` value on the trigger element, or pass a string as the value of the `toggleGroup` key when initialising the plugin you will create a linked toggle group. Openning one member of a toggle group will trigger any other open members of the toggle group to close. Open members are closed via their own parent toggle instances, so custom close methods are respected.
+
+eg: toggle #1 is visible
+
+    <a href="#1" data-toggle class="toggler--target-in" data-toggle-group="some-group">Toggle content</a>
+    <div id="#id1" class="toggler--in">
+        Content to toggle.
+    </div>
+
+
+Now clicking toggle #2 will cause `#id1` above to close as these toggles share a toggle-group attr:
+
+    <a href="#id2" data-toggle data-toggle-group="some-group">Toggle content</a>
+    <div id="#id2">
+        Content to toggle.
+    </div>
+
 
 ## Configuration
 
@@ -52,16 +72,19 @@ Or set global defaults via the `$.fn.toggler.defaults` object, before your toggl
 
 ## Options and defaults
 
-* `methodIn`:   jQuery method to use when showing the target, as a string
-* `speedIn`:    speed in milliseconds to use when showing the target
-* `inCallback`: callback fn to be executed after target shown
-* `methodOut`:  jQuery method to use when hiding the target, as a string
-* `speedOut`:   speed in milliseconds to use when hiding the target
-* `outCallback`: callback fn to be executed after target shown
-* `targetInClass`: HTML classname applied to the target after it has finished showing. Only applied after the target has been shown by the plugin for the first time
-* `targetOutClass`: HTML classname applied to the target after it has finished hiding. Only applied after the target has been hidden by the plugin for the first time
+* `methodIn`            : jQuery method to use when showing the target, as a string
+* `speedIn`             : speed in milliseconds to use when showing the target
+* `beforeInCallback`    : callback fn to be executed before target shown
+* `afterInCallback`     : callback fn to be executed after target shown
+* `methodOut`           : jQuery method to use when hiding the target, as a string
+* `speedOut`            : speed in milliseconds to use when hiding the target
+* `beforeOutCallback`   : callback fn to be executed before target hidden
+* `afterOutCallback`    : callback fn to be executed after target hidden
+* `targetInClass`       : HTML classname applied to the target after it has finished showing. Only applied after the target has been shown by the plugin for the first time
+* `targetOutClass`      : HTML classname applied to the target after it has finished hiding. Only applied after the target has been hidden by the plugin for the first time
 * `targetAnimatingClass`: HTML classname applied to the target while it is animating.
 * `triggerTargetInClass`: HTML classname applied to the *trigger* element when its target is visible. Only applied after the target has been shown or hidden for the first time
+* `toggleGroup`         : String value representing the toggle group to assign this toggle to. See [above for how to use](#toggle-groups)
 
 ### Defaults
 

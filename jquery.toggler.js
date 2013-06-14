@@ -3,7 +3,7 @@
  * A simple jQuery Plugin for toggling the visibility of elements
  * 
  * @author  Tom Davies - Erskine Design
- * @version  0.5.1
+ * @version  0.6.0
  */
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
