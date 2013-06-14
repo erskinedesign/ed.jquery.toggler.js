@@ -54,42 +54,51 @@
             return (this.targetIsVisible() ? this.hide() : this.show());
         },
         show: function(){
-            var method = this.opts.methodIn,
-                speed  = this.opts.speedIn,
-                callback = this.opts.inCallback,
-                inClass = this.opts.targetInClass,
-                outClass = this.opts.targetOutClass;
-
-            this.__transition(method, speed, callback, inClass, outClass);
+            var opts = {
+                    method: this.opts.methodIn,
+                    speed: this.opts.speedIn,
+                    beforeCallback: this.opts.beforeInCallback,
+                    afterCallback: this.opts.afterInCallback,
+                    classToRemove: this.opts.targetOutClass,
+                    classToAdd: this.opts.targetInClass
+                };
+            this.__transition(this.$target, opts);
         },
         hide: function(){
-            var method = this.opts.methodOut,
-                speed  = this.opts.speedOut,
-                callback = this.opts.outCallback,
-                inClass = this.opts.targetInClass,
-                outClass = this.opts.targetOutClass;
+            var opts = {
+                    method: this.opts.methodOut,
+                    speed: this.opts.speedOut,
+                    beforeCallback: this.opts.beforeOutCallback,
+                    afterCallback: this.opts.afterOutCallback,
+                    classToRemove: this.opts.targetInClass,
+                    classToAdd: this.opts.targetOutClass
+                };
 
-            this.__transition(method, speed, callback, outClass, inClass);
+            this.__transition(this.$target, opts);
         },
-        __transition: function(method, speed, callback, classToAdd, classToRemove){
+        __transition: function($el, opts){
             var _self = this,
                 animClass = this.opts.targetAnimatingClass,
                 triggerClass = this.opts.triggerTargetInClass;
 
-            this.$target.removeClass(classToRemove).addClass(animClass);
+            if ($.isFunction(opts.beforeCallback)){
+                opts.beforeCallback();
+            }
 
-            this.$target.stop()[method](speed, function(){
+            $el.removeClass(opts.classToRemove).addClass(animClass);
+
+            $el.stop()[opts.method](opts.speed, function(){
                 var triggerMethod;
 
                 //stopped animating, now in or out
-                _self.$target.removeClass(animClass).addClass(classToAdd);
+                $el.removeClass(animClass).addClass(opts.classToAdd);
 
                 //toggle the class on the trigger
                 triggerMethod = _self.targetIsVisible ? 'addClass' : 'removeClass';
                 _self.$trigger[triggerMethod](triggerClass);
 
-                if ($.isFunction(callback)){
-                    callback();
+                if ($.isFunction(opts.afterCallback)){
+                    opts.afterCallback();
                 }
 
             });
