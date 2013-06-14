@@ -21,6 +21,7 @@
 
         this.targetSel = $trigger.attr('href') || $trigger.attr('data-target');
         this.$target = $(this.targetSel);
+        this.group = $trigger.data('toggleGroup') || false;
 
         this.init();
     };
@@ -62,6 +63,10 @@
                     classToRemove: this.opts.targetOutClass,
                     classToAdd: this.opts.targetInClass
                 };
+            //if this is in a toggle group, hide other instances matching
+            if(this.group){
+                $('[data-toggle-group="'+ this.group +'"]').toggler('hide');
+            }
             this.__transition(this.$target, opts);
         },
         hide: function(){
