@@ -28,10 +28,9 @@
     Toggler.prototype = {
         constructor: Toggler,
         init: function() {
-            this.addListeners();
+            this.bind();
         },
-
-        addListeners: function() {
+        bind: function() {
             var _self = this;
             this.$trigger.off('change.toggler click.toggler');
             this.$trigger.on('change.toggler', function(e){
