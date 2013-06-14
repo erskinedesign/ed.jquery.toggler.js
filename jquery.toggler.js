@@ -3,7 +3,7 @@
  * A simple jQuery Plugin for toggling the visibility of elements
  * 
  * @author  Tom Davies - Erskine Design
- * @version  0.5.0
+ * @version  0.5.1
  */
 (function (factory) {
     if (typeof define === 'function' && define.amd) {
@@ -37,7 +37,7 @@
             this.$trigger.on('change.toggler', function(e){
                 _self.toggle();
             });
-            if (this.$trigger.is('a, button')){
+            if (this.$trigger.not('input[type=radio], input[type=checkbox], input[type=submit], select')){
                 this.$trigger.on('click.toggler', function(e){
                     e.preventDefault();
                     _self.toggle();
@@ -132,7 +132,7 @@
         }
     });
 
-    $(document).on('click.toggler', 'a[data-toggle]', function(e){
+    $(document).on('click.toggler', '[data-toggle]', function(e){
         if(!$(this).data('toggler')){
             e.preventDefault();
             $(this).toggler('toggle');
