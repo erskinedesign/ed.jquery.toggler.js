@@ -43,7 +43,13 @@
                 });
             }
         },
-
+        unbind: function(){
+            this.$trigger.off('change.toggler, click.toggler');
+        },
+        destroy: function(){
+            this.$trigger.removeData('toggler');
+            this.unbind();
+        },
         toggle: function(e) {
             return (this.targetIsVisible() ? this.hide() : this.show());
         },
